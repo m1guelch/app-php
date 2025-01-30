@@ -1,0 +1,17 @@
+services:
+  php:
+    image: m1guelch/app-php:latest
+    container_name: php_app-php
+    restart: always
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_app-php
+    volumes:
+      - .:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - php
+    restart: always
